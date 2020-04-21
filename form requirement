@@ -1,0 +1,32 @@
+Location:
+    + street
+    + city
+    + state
+    + zipcode
+    + price
+    + extra charges
+
+Listing type:
+    + list_for : sell, rent
+    + property_type : apartment, house, others
+    + apartment_subtype : residential, independent, studio, serviced
+    + house_subtype : independent, farm
+    + user_type : owner, dealer
+    + description
+
+Property Details:
+    + area
+    + num_bedroom
+    + num bathroom
+    + num balconies
+    + total floor
+    + furnishing :   Furnished, Unfurnished, Semifurnished
+    + parking : yes/no
+    + available_from
+    + building age
+
+User:
+    - email
+    - phone number
+    - create account : yes, no
+    - password
