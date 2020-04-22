@@ -1,4 +1,4 @@
-package com.property.config;
+package com.property.spring;
 
 import com.property.dao.AddressRepository;
 import com.property.dao.ListingRepository;
@@ -9,8 +9,6 @@ import com.property.dto.User;
 import com.property.exception.DaoException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.ArrayList;
 
 public class Driver {
     public static void main(String[] args) throws DaoException {

@@ -50,40 +50,7 @@
 <!-- Header Section end -->
 
 <!-- Page top Section end -->
-<section class="page-top-section set-bg" data-setbg="${pageContext.request.contextPath}/resource/img/page-top-bg.jpg">
-    <div class="page-top-warp">
-        <form class="main-search-form">
-            <div class="search-type">
-                <div class="st-item">
-                    <input type="radio" name="st" id="buy" checked>
-                    <label for="buy">Buy</label>
-                </div>
-                <div class="st-item">
-                    <input type="radio" name="st" id="rent">
-                    <label for="rent">Rent</label>
-                </div>
-                <div class="st-item">
-                    <input type="radio" name="st" id="sell">
-                    <label for="sell">Sell</label>
-                </div>
-                <div class="st-item">
-                    <input type="radio" name="st" id="property">
-                    <label for="property">Property Value</label>
-                </div>
-                <div class="st-item">
-                    <input type="radio" name="st" id="agents">
-                    <label for="agents">Agents</label>
-                </div>
-            </div>
-            <div class="search-input si-v-2">
-                <input type="text" placeholder="Search by state, postcode or suburb">
-                <button class="site-btn" type="submit">Search</button>
-                <button class="site-btn sb-light">Show Filters</button>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. </p>
-        </form>
-    </div>
-</section>
+<%@include file="search_bar.jsp"%>
 <!-- Page top Section end -->
 
 <!-- Search Result Section end -->
@@ -103,26 +70,32 @@
                         <li>Price High</li>
                     </ul>
                     <div class="row">
-                        <c:forEach var="l" items="${listings}">
-                            <div class="col-md-6">
-                                <div class="property-item">
-                                    <div class="pi-image">
-                                        <img src="${pageContext.request.contextPath}/resource/img/property-search/1.jpg" alt="">
-                                        <div class="pi-badge new">New</div>
+
+                        <c:if test="${isempty}" >
+                            <h3>Sorry. No listing found with those criteria. Please modify your search or try again later.</h3>
+                        </c:if>
+                        <c:if test="!${isempty}">
+                            <c:forEach var="l" items="${listings}">
+                                <div class="col-md-6">
+                                    <div class="property-item">
+                                        <div class="pi-image">
+                                            <img src="${pageContext.request.contextPath}/resource/img/property-search/1.jpg" alt="">
+                                            <div class="pi-badge new">New</div>
+                                        </div>
+                                        <h3>${l.description}</h3>
+                                        <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
+                                        <div class="pi-metas">
+                                            <div class="pi-meta">${l.area} sq ft</div>
+                                            <div class="pi-meta">${l.city}</div>
+                                        </div>
+                                        <a href="#" class="readmore-btn">Find out more</a>
                                     </div>
-                                    <h3>${l.description}</h3>
-                                    <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
-                                    <div class="pi-metas">
-                                        <div class="pi-meta">${l.area} sq ft</div>
-                                        <div class="pi-meta">${l.city}</div>
-                                    </div>
-                                    <a href="#" class="readmore-btn">Find out more</a>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                            <button class="site-btn sb-big load-more">load More</button>
+                        </c:if>
 
                     </div>
-                    <button class="site-btn sb-big load-more">load More</button>
                 </div>
             </div>
         </div>

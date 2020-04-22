@@ -4,6 +4,8 @@ import com.property.dao.AddressRepository;
 import com.property.dao.ListingRepository;
 import com.property.dto.Address;
 import com.property.dto.Listing;
+import com.property.dto.Pricing;
+import com.property.dto.Property_Details;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 import com.property.exception.UserInputException;
@@ -49,5 +51,10 @@ public class ListingServiceImpl implements ListingService{
     @Override
     public Optional<Listing> getListingById(long id) throws DaoException {
         return listingRepository.getListingById(id);
+    }
+
+    @Override
+    public long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details) throws DaoException, DtoException {
+        return 0;
     }
 }

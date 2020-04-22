@@ -1,4 +1,4 @@
-package com.property.config;
+package com.property.spring;
 
 import java.io.IOException;
 import java.util.Properties;

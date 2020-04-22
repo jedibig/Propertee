@@ -7,6 +7,7 @@ import com.property.service.ListingService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,22 +24,20 @@ public class SearchController {
     ListingService listingService;
 
     @GetMapping("/search/location.do")
-    public ModelAndView searchOnLocation(HttpSession session, @RequestParam("keyword") String keyword){
+    public String searchOnLocation(HttpSession session, @RequestParam("keyword") String keyword, Model m) throws DaoException {
         logger.info("Receive request to search based on location.");
-        ModelAndView mv = new ModelAndView();
 
         try {
             List<Listing> listings = listingService.searchByLocation(keyword).orElse(Collections.emptyList());
-            logger.info("Got these listings: " + listings);
-            mv.setViewName("search_result");
-            mv.addObject("listings", listings);
-        } catch (DaoException e) {
-            mv.setViewName("daoerror");
+            if (listings.isEmpty()){
+                m.addAttribute("isempty", true);
+            }
+            m.addAttribute("listings", listings);
+            return "search_result";
         } catch (DtoException e) {
-            mv.setViewName("home_search");
-            mv.addObject("error", e.getMessage());
+            m.addAttribute("error", e.getMessage());
+            return "index";
         }
 
-        return mv;
     }
 }

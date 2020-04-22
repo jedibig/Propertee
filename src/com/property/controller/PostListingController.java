@@ -2,24 +2,21 @@ package com.property.controller;
 
 import com.property.controller.util.ListingFieldsMapper;
 import com.property.controller.util.PropertyDetailsConverter;
-import com.property.dto.Listing;
-import com.property.dto.Property_Details;
+import com.property.dto.*;
+import com.property.exception.DaoException;
+import com.property.exception.DtoException;
+import com.property.service.ListingService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import java.beans.PropertyEditor;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 @Controller
 public class PostListingController {
@@ -29,16 +26,32 @@ public class PostListingController {
     ListingFieldsMapper listingConverter;
     @Autowired
     PropertyDetailsConverter detailsConverter;
+    @Autowired
+    ListingService listingService;
 
 
     @PostMapping("/post/listing.do")
-    public String postNewListing(HttpSession session, @ModelAttribute Listing listing, BindingResult result){
+    public String postNewListing(Model m, @ModelAttribute Listing listing, BindingResult listingResult,
+                                 @ModelAttribute Address address, BindingResult addressResult,
+                                 @ModelAttribute User user, BindingResult userResult,
+                                 @ModelAttribute Property_Details property_details, BindingResult detailsResult,
+                                 @ModelAttribute Pricing pricing, BindingResult pricingResult) throws DaoException {
 
-        if (result.hasErrors()){
-            logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
+//        if (result.hasErrors()){
+//            logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
+//        }
+
+        try {
+            long listing_id = listingService.insertNewListing(listing, address, pricing, property_details);
+            m.addAttribute("listing_id", listing_id);
+            m.addAttribute("email", user.getEmail());
+
+        } catch (DtoException e) {
+            e.printStackTrace();
         }
 
         logger.info(listing);
+        //TODO create success page
         return "success";
     }
 

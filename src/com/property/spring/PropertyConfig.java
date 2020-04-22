@@ -1,4 +1,4 @@
-package com.property.config;
+package com.property.spring;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

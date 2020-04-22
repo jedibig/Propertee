@@ -22,7 +22,7 @@ public class GetListingController {
     ListingService listingService;
 
     @GetMapping("/get/listing.do")
-    public String getListing(Model m, @RequestParam("listing_id") long listing_id, BindingResult result){
+    public String getListing(Model m, @RequestParam("listing_id") long listing_id, BindingResult result) throws DaoException {
         if (result.hasErrors()){
             logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
         }
@@ -33,9 +33,6 @@ public class GetListingController {
             m.addAttribute("listing", listing);
             logger.info("Done serving request to get listing");
             return "single_listing";
-        } catch (DaoException e) {
-            logger.error(e.getMessage());
-            return "daoerror";
         } catch (DtoException e) {
             logger.error(e.getMessage());
             return "dtoerror";
