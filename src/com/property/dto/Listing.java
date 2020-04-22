@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Data
@@ -54,7 +56,7 @@ public class Listing {
     }
 
     public enum Property_Type{
-        APARTMENT, HOUSE, OTHERS;
+        APARTMENT, HOUSE, OTHERS
     }
 
     public enum List_For{
@@ -69,5 +71,27 @@ public class Listing {
         INDEPENDENT, FARM
     }
 
+    public void setUser(User user) {
+        this.user = user;
+        List<Listing> list = user.getListing();
+        if (list == null){
+            list = new LinkedList<>();
+        }
+        list.add(this);
+    }
 
+    public void setAddress(Address address) {
+        this.address = address;
+        address.setListing(this);
+    }
+
+    public void setPricing(Pricing pricing) {
+        this.pricing = pricing;
+        pricing.setListing(this);
+    }
+
+    public void setDetails(Property_Details details) {
+        this.details = details;
+        details.setListing(this);
+    }
 }

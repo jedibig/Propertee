@@ -26,7 +26,7 @@ public class AddressRepoImpl2 implements AddressRepository {
             session.update(address);
             t.commit();
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -37,7 +37,7 @@ public class AddressRepoImpl2 implements AddressRepository {
                     .setParameter("param", city);
             return Optional.ofNullable(queryListingId.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -48,7 +48,7 @@ public class AddressRepoImpl2 implements AddressRepository {
                     .setParameter("param", zipcode);
             return Optional.ofNullable(queryListingId.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -59,7 +59,7 @@ public class AddressRepoImpl2 implements AddressRepository {
                     .setParameter("param", state);
             return Optional.ofNullable(queryListingId.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 }

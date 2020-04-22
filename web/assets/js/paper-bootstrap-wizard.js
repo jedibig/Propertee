@@ -159,7 +159,7 @@ transparent = true;
 
                 reader.onload = function (e) {
                     $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-                }
+                };
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -176,7 +176,7 @@ transparent = true;
         		}, wait);
         		if (immediate && !timeout) func.apply(context, args);
         	};
-        };
+        }
 
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

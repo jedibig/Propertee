@@ -22,17 +22,15 @@ public class GetListingController {
     ListingService listingService;
 
     @GetMapping("/get/listing.do")
-    public String getListing(Model m, @RequestParam("listing_id") long listing_id, BindingResult result) throws DaoException {
-        if (result.hasErrors()){
-            logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
-        }
+    public String getListing(Model m, @RequestParam(name = "listing_id") long listing_id) throws DaoException {
+
 
         try {
             logger.info("Getting listing from id: " + listing_id);
             Listing listing = listingService.getListingById(listing_id).orElseThrow(() -> new DtoException("Listing not found."));
             m.addAttribute("listing", listing);
             logger.info("Done serving request to get listing");
-            return "single_listing";
+            return "single_property";
         } catch (DtoException e) {
             logger.error(e.getMessage());
             return "dtoerror";

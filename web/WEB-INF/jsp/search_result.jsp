@@ -74,7 +74,7 @@
                         <c:if test="${isempty}" >
                             <h3>Sorry. No listing found with those criteria. Please modify your search or try again later.</h3>
                         </c:if>
-                        <c:if test="!${isempty}">
+                        <c:if test="${!isempty}">
                             <c:forEach var="l" items="${listings}">
                                 <div class="col-md-6">
                                     <div class="property-item">
@@ -88,7 +88,7 @@
                                             <div class="pi-meta">${l.area} sq ft</div>
                                             <div class="pi-meta">${l.city}</div>
                                         </div>
-                                        <a href="#" class="readmore-btn">Find out more</a>
+                                        <a href="${pageContext.request.contextPath}/get/listing.do?listing_id=${l.listing_id}" class="readmore-btn">Find out more</a>
                                     </div>
                                 </div>
                             </c:forEach>

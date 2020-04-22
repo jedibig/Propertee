@@ -2,10 +2,7 @@ package com.property.service;
 
 import com.property.dao.AddressRepository;
 import com.property.dao.ListingRepository;
-import com.property.dto.Address;
-import com.property.dto.Listing;
-import com.property.dto.Pricing;
-import com.property.dto.Property_Details;
+import com.property.dto.*;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 import com.property.exception.UserInputException;
@@ -13,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +52,12 @@ public class ListingServiceImpl implements ListingService{
     }
 
     @Override
-    public long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details) throws DaoException, DtoException {
-        return 0;
+    public long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details, User user) throws DaoException, DtoException {
+        listing.setAddress(address);
+        listing.setPricing(pricing);
+        listing.setDetails(property_details);
+        listing.setUser(user);
+        listing.setDate_listed(LocalDate.now());
+        return listingRepository.insertNewListing(listing);
     }
 }

@@ -28,7 +28,7 @@ public class Address {
     private static final String CITY_PATTERN = "^([a-zA-Z\\u0080-\\u024F]+(?:. |-| |'))*[a-zA-Z\\u0080-\\u024F]*$";
 
     public enum Address_Type{
-        ZIPCODE, STATE, CITY, INVALID;
+        ZIPCODE, STATE, CITY, INVALID
     }
 
     public static Address_Type getType(String input){

@@ -26,7 +26,7 @@ public class PricingRepoImpl implements PricingRepositry{
             session.update(pricing);
             t.commit();
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -37,7 +37,7 @@ public class PricingRepoImpl implements PricingRepositry{
                     .setParameter("min", minVal).setParameter("max", maxVal);
             return Optional.ofNullable(query.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -48,7 +48,7 @@ public class PricingRepoImpl implements PricingRepositry{
                     .setParameter("min", minVal).setParameter("max", maxVal);
             return Optional.ofNullable(query.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 }

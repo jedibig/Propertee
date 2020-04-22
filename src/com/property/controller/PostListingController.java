@@ -22,12 +22,15 @@ import java.time.LocalDate;
 public class PostListingController {
     static Logger logger = Logger.getLogger(PostListingController.class);
 
-    @Autowired
-    ListingFieldsMapper listingConverter;
-    @Autowired
-    PropertyDetailsConverter detailsConverter;
-    @Autowired
-    ListingService listingService;
+    final ListingFieldsMapper listingConverter;
+    final PropertyDetailsConverter detailsConverter;
+    final ListingService listingService;
+
+    public PostListingController(ListingFieldsMapper listingConverter, PropertyDetailsConverter detailsConverter, ListingService listingService) {
+        this.listingConverter = listingConverter;
+        this.detailsConverter = detailsConverter;
+        this.listingService = listingService;
+    }
 
 
     @PostMapping("/post/listing.do")
@@ -42,7 +45,7 @@ public class PostListingController {
 //        }
 
         try {
-            long listing_id = listingService.insertNewListing(listing, address, pricing, property_details);
+            long listing_id = listingService.insertNewListing(listing, address, pricing, property_details, user);
             m.addAttribute("listing_id", listing_id);
             m.addAttribute("email", user.getEmail());
 
@@ -52,7 +55,7 @@ public class PostListingController {
 
         logger.info(listing);
         //TODO create success page
-        return "success";
+        return "add_listing_success";
     }
 
 

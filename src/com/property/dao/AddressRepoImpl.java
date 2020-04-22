@@ -24,7 +24,7 @@ public class AddressRepoImpl {
             session.update(address);
             t.commit();
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -35,7 +35,7 @@ public class AddressRepoImpl {
                 .setParameter("city", city);
             return Optional.ofNullable(query.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -47,7 +47,7 @@ public class AddressRepoImpl {
 
 
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -57,7 +57,7 @@ public class AddressRepoImpl {
                     .setParameter("state", state);
             return Optional.ofNullable(query.getResultList());
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 }

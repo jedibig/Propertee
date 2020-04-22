@@ -51,11 +51,6 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public static PropertySourcesPlaceholderConfigurer pc() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Bean
     public InternalResourceViewResolver vr(){
         return new InternalResourceViewResolver("/WEB-INF/jsp/", ".jsp");
     }
@@ -68,6 +63,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/home").setViewName("index");
         registry.addViewController("/property-form").setViewName("post_property");
     }
 }

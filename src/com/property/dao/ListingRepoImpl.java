@@ -1,6 +1,7 @@
 package com.property.dao;
 
 import com.property.dto.Listing;
+import com.property.dto.User;
 import com.property.exception.DaoException;
 import com.property.exception.ListingNotFoundException;
 import org.apache.log4j.Logger;
@@ -20,19 +21,32 @@ import java.util.Optional;
 public class ListingRepoImpl implements ListingRepository{
     Logger logger = Logger.getLogger(ListingRepoImpl.class);
 
-    @Autowired
-    SessionFactory sf;
+    @Autowired SessionFactory sf;
 
     @Override
     public long insertNewListing(Listing listing) throws DaoException {
         try (Session session = sf.openSession()){
 
+            logger.info("Attempting to add new listing to db.");
+            User db_user = session.createQuery("from User where email = ?1", User.class).setParameter(1, listing.getUser().getEmail()).uniqueResult();
+            if (db_user != null){
+                logger.info("Updating user");
+//                db_user.setPhonenumber(listing.getUser().getPhonenumber());
+//                db_user.getListing().addAll(listing.getUser().getListing());
+//                listing.setUser(db_user);
+            }
             Transaction t = session.beginTransaction();
+            logger.info("going to persist");
+
             session.persist(listing);
+            logger.info("persisted");
+
             t.commit();
             logger.info("inserted listing with id " + listing.getListing_id());
+
             return listing.getListing_id();
         } catch (HibernateException e){
+            logger.error("Got error " + e.getMessage());
             throw new DaoException(e);
         }
     }

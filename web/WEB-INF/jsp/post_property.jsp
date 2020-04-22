@@ -84,7 +84,7 @@
                 <!--      Wizard container        -->
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="red" id="wizard">
-                        <form action="post/listing.do" method="post" id="property_form">
+                        <form action="${pageContext.request.contextPath}/post/listing.do" method="post" id="property_form">
                             <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
 
                             <div class="wizard-header">

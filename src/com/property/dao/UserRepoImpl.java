@@ -22,7 +22,7 @@ public class UserRepoImpl implements UserRepository {
     SessionFactory sf;
 
     public long insertUser(User user) throws DaoException {
-        try (Session session = sf.openSession();){
+        try (Session session = sf.openSession()){
             if (session.get("id", user.getEmail()) != null)
                 throw new DuplicateUsernameException();
 
@@ -34,7 +34,7 @@ public class UserRepoImpl implements UserRepository {
 
             return id;
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -52,7 +52,7 @@ public class UserRepoImpl implements UserRepository {
             t.commit();
 
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -69,7 +69,7 @@ public class UserRepoImpl implements UserRepository {
             t.commit();
 
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
@@ -89,7 +89,7 @@ public class UserRepoImpl implements UserRepository {
 
             return true;
         } catch (HibernateException e){
-            throw (DaoException) new DaoException().initCause(e);
+            throw (DaoException) new DaoException(e);
         }
     }
 
