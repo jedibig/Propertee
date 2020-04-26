@@ -71,30 +71,31 @@
                     </ul>
                     <div class="row">
 
-                        <c:if test="${isempty}" >
-                            <h3>Sorry. No listing found with those criteria. Please modify your search or try again later.</h3>
-                        </c:if>
-                        <c:if test="${!isempty}">
-                            <c:forEach var="l" items="${listings}">
-                                <div class="col-md-6">
-                                    <div class="property-item">
-                                        <div class="pi-image">
-                                            <img src="${pageContext.request.contextPath}/resource/img/property-search/1.jpg" alt="">
-                                            <div class="pi-badge new">New</div>
+                        <c:choose>
+                            <c:when test="${isempty}">
+                                <h3>Sorry. No listing found with those criteria. Please modify your search or try again later.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="l" items="${listings}">
+                                    <div class="col-md-6">
+                                        <div class="property-item">
+                                            <div class="pi-image">
+                                                <img src="${pageContext.request.contextPath}/resource/img/property-search/1.jpg" alt="">
+                                                <div class="pi-badge new">New</div>
+                                            </div>
+                                            <h3>${l.description}</h3>
+                                            <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
+                                            <div class="pi-metas">
+                                                <div class="pi-meta">${l.area} sq ft</div>
+                                                <div class="pi-meta">${l.city}</div>
+                                            </div>
+                                            <a href="${pageContext.request.contextPath}/get/listing.do?listing_id=${l.listing_id}" class="readmore-btn">Find out more</a>
                                         </div>
-                                        <h3>${l.description}</h3>
-                                        <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
-                                        <div class="pi-metas">
-                                            <div class="pi-meta">${l.area} sq ft</div>
-                                            <div class="pi-meta">${l.city}</div>
-                                        </div>
-                                        <a href="${pageContext.request.contextPath}/get/listing.do?listing_id=${l.listing_id}" class="readmore-btn">Find out more</a>
                                     </div>
-                                </div>
-                            </c:forEach>
-                            <button class="site-btn sb-big load-more">load More</button>
-                        </c:if>
-
+                                </c:forEach>
+                                <button class="site-btn sb-big load-more">load More</button>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

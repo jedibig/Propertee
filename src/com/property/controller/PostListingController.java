@@ -22,6 +22,7 @@ import java.time.LocalDate;
 public class PostListingController {
     static Logger logger = Logger.getLogger(PostListingController.class);
 
+    @Autowired
     final ListingFieldsMapper listingConverter;
     final PropertyDetailsConverter detailsConverter;
     final ListingService listingService;

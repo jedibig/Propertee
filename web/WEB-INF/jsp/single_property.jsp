@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
     <title>Search Property For Free | Propertee</title>
@@ -80,10 +82,10 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="pi-metas">
-                                    <div class="pi-meta">3 Bed </div>
-                                    <div class="pi-meta">2 Baths</div>
-                                    <div class="pi-meta">1 Garage</div>
-                                    <div class="pi-meta">2849 SF</div>
+                                    <div class="pi-meta">${listing.details.bedroom_num} Bed </div>
+                                    <div class="pi-meta">${listing.details.bathroom_num} Baths</div>
+                                    <div class="pi-meta">${listing.details.balconies} Balcony</div>
+                                    <div class="pi-meta">${listing.area} Sq.ft</div>
                                 </div>
                             </div>
                             <div class="col-lg-5 text-left text-lg-right">
@@ -101,8 +103,15 @@
                         <div class="row">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                                 <div class="pf-box">
-                                    <h6>House Type</h6>
-                                    <p>Family</p>
+                                    <h6>Property Type</h6>
+                                    <p>${listing.property_type}
+                                        <c:if test="${listing.apartment_subtype != null}">
+                                            ${listing.apartment_substype}
+                                        </c:if>
+                                        <c:if test="${listing.house_subtype != null}">
+                                            ${listing.house_subtype}
+                                        </c:if>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -113,8 +122,8 @@
                             </div>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                                 <div class="pf-box">
-                                    <h6>Year Built</h6>
-                                    <p>2008</p>
+                                    <h6>Building Age</h6>
+                                    <p>${listing.details.age}</p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -132,7 +141,7 @@
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                                 <div class="pf-box">
                                     <h6>Bathrooms</h6>
-                                    <p>2</p>
+                                    <p>${listing.details.bathroom_num}</p>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +161,14 @@
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3">
                                 <div class="pf-box">
                                     <h6>Parking Spaces</h6>
-                                    <p> 2 spaces</p>
+                                    <p>
+                                        <c:if test="${parking}">
+                                            Yes
+                                        </c:if>
+                                        <c:if test="${!parking}">
+                                            No
+                                        </c:if>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -162,20 +178,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                                <div class="pf-box">
-                                    <h6>Patio</h6>
-                                    <p>128 SQ</p>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <div class="pf-box">
-                                    <h6>Playgroung</h6>
-                                    <p>No</p>
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="row">--%>
+<%--                            <div class="col-6 col-sm-4 col-md-3 col-lg-2">--%>
+<%--                                <div class="pf-box">--%>
+<%--                                    <h6>Patio</h6>--%>
+<%--                                    <p>128 SQ</p>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-6 col-lg-3">--%>
+<%--                                <div class="pf-box">--%>
+<%--                                    <h6>Playgroung</h6>--%>
+<%--                                    <p>No</p>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
                 <div class="video-item">
@@ -207,8 +223,8 @@
                 <div class="agent-widget">
                     <img src="../../resource/img/agents/1.jpg" alt="">
                     <div class="aw-text">
-                        <h4>Christinne James</h4>
-                        <h6>Real Estate Agent</h6>
+                        <h4>${listing.user.email}</h4>
+                        <h6>${listing.user_type}</h6>
                         <p>Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora. Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. </p>
                         <a href="#" class="readmore-btn">Contact the agent</a>
                     </div>

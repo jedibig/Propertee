@@ -73,11 +73,11 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
-        List<Listing> list = user.getListing();
-        if (list == null){
-            list = new LinkedList<>();
-        }
-        list.add(this);
+//        List<Listing> list = user.getListing();
+//        if (list == null){
+//            list = new LinkedList<>();
+//        }
+//        list.add(this);
     }
 
     public void setAddress(Address address) {

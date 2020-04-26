@@ -45,14 +45,14 @@
     <meta property="og:site_name" content="Creative Tim" />
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css">
     <link href="${pageContext.request.contextPath}/resource/css/paper-bootstrap-wizard.css" rel="stylesheet" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="${pageContext.request.contextPath}/resource/css/demo.css" rel="stylesheet" />
 
     <!-- Fonts and Icons -->
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resource/css/font-awesome.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resource/css/themify-icons.css" rel="stylesheet">
     <!-- Google Tag Manager -->

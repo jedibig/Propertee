@@ -3,15 +3,18 @@ package com.property.dao;
 import com.property.dto.User;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
+import com.property.exception.DuplicateEmailException;
+
+import java.util.Optional;
 
 public interface UserRepository {
     /**
      * @param user
      * @return int generated id from db.
      */
-    long insertUser(User user) throws DaoException;
+    long insertUser(User user) throws DuplicateEmailException, DaoException;
     void updateUser(User user) throws DaoException;
     void removeUser(User user) throws DaoException;
-    boolean verifyUserLogin(User user) throws DaoException, DtoException;
+    Optional<User> verifyUserLogin(User user) throws DaoException;
     User getUserById(long id) throws DaoException;
 }

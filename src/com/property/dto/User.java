@@ -21,11 +21,10 @@ public class User {
     private String email;
     private String password;
     private String phonenumber;
-    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
-    private List<Listing> listing;
+//    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
+//    private List<Listing> listing;
     @Version
     private int version;
-
     @Override
     public String toString() {
         return "User{" +

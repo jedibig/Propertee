@@ -2,29 +2,30 @@ package com.property.dao;
 
 import com.property.dto.User;
 import com.property.exception.DaoException;
-import com.property.exception.DtoException;
-import com.property.exception.DuplicateUsernameException;
+import com.property.exception.DuplicateEmailException;
 import com.property.exception.UserNotFoundException;
+import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+@AllArgsConstructor
 @Repository
 public class UserRepoImpl implements UserRepository {
-    Logger logger = Logger.getLogger(UserRepoImpl.class);
+    static Logger logger = Logger.getLogger(UserRepoImpl.class);
 
-    @Autowired
-    SessionFactory sf;
+    final SessionFactory sf;
 
-    public long insertUser(User user) throws DaoException {
+    public long insertUser(User user) throws DuplicateEmailException, DaoException {
         try (Session session = sf.openSession()){
             if (session.get("id", user.getEmail()) != null)
-                throw new DuplicateUsernameException();
+                throw new DuplicateEmailException();
 
             Transaction t = session.beginTransaction();
             session.persist(user);
@@ -34,7 +35,7 @@ public class UserRepoImpl implements UserRepository {
 
             return id;
         } catch (HibernateException e){
-            throw (DaoException) new DaoException(e);
+            throw new DaoException(e);
         }
     }
 
@@ -52,7 +53,7 @@ public class UserRepoImpl implements UserRepository {
             t.commit();
 
         } catch (HibernateException e){
-            throw (DaoException) new DaoException(e);
+            throw new DaoException(e);
         }
     }
 
@@ -73,23 +74,18 @@ public class UserRepoImpl implements UserRepository {
         }
     }
 
-    public boolean verifyUserLogin(User user) throws DaoException, DtoException {
+    public Optional<User> verifyUserLogin(User user) throws DaoException, UserNotFoundException {
         try (Session session = sf.openSession()){
 
-            session.get(User.class, user.getEmail());
-            Query<User> query= session.createQuery("select id, email, phonenumber from User where email = :email and password = :password", User.class);
-            query.setParameter("email", user.getEmail());
-            query.setParameter("password", user.getPassword());
-            if (session.get("id", user.getEmail()) == null)
-                throw new UserNotFoundException();
+            return Optional.ofNullable(
+                    session.createQuery("select id, email, phonenumber from User where email = ?1 and password = ?2", User.class)
+                            .setParameter(1, user.getEmail())
+                            .setParameter(2, user.getPassword())
+                            .uniqueResult()
+            );
 
-            Transaction t = session.beginTransaction();
-            session.delete(user);
-            t.commit();
-
-            return true;
         } catch (HibernateException e){
-            throw (DaoException) new DaoException(e);
+            throw new DaoException(e);
         }
     }
 

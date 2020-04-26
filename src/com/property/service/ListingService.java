@@ -1,9 +1,6 @@
 package com.property.service;
 
-import com.property.dto.Address;
-import com.property.dto.Listing;
-import com.property.dto.Pricing;
-import com.property.dto.Property_Details;
+import com.property.dto.*;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 
@@ -26,10 +23,11 @@ public interface ListingService {
      * @param address
      * @param pricing
      * @param property_details
+     * @param user
      * @return long. Generated Listing Id.
      * @throws DaoException
      * @throws DtoException
      */
-    long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details) throws DaoException, DtoException;
+    long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details, User user) throws DaoException, DtoException;
 
 }
