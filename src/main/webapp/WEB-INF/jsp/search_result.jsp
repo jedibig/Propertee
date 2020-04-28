@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Collections" %><%--
   Created by IntelliJ IDEA.
   User: jedidiahbowo
   Date: 4/19/20
@@ -83,7 +83,7 @@
                                                 <img src="${pageContext.request.contextPath}/resource/img/property-search/1.jpg" alt="">
                                                 <div class="pi-badge new">New</div>
                                             </div>
-                                            <h3>${l.description}</h3>
+                                            <h3>${l.project_name}</h3>
                                             <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
                                             <div class="pi-metas">
                                                 <div class="pi-meta">${l.area} sq ft</div>

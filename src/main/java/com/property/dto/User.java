@@ -2,11 +2,11 @@ package com.property.dto;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity
@@ -17,18 +17,25 @@ import java.util.List;
 @DynamicUpdate
 @Table(name = "PROPERTY_USER")
 public class User {
+    //TODO User fields pattern
     final static String PASSWORD_PATTERN = "";
+    final static String PHONENUMBER_PATTERN = "";
+
 
     @Id @GeneratedValue @ToString.Exclude
     private long id;
-    @Column(unique = true)
-    @Email
+    @Column(name = "name")
+    private String name;
+    @Column(unique = true, name="email") @Email
     private String email;
-    @Pattern(regexp = PASSWORD_PATTERN)
+    @Column(name = "password") @Pattern(regexp = PASSWORD_PATTERN)
     private String password;
-    private String phonenumber;
-//    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
-//    private List<Listing> listing;
+    @Column(name = "phoneNumber") @Pattern(regexp = PASSWORD_PATTERN)
+    private String phoneNumber;
+
+    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
+    private List<Listing> listings;
+
     @Version
     private int version;
     @Override
@@ -37,7 +44,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

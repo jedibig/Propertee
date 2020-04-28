@@ -304,7 +304,7 @@
                                     <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <div class="form-group">
-                                                <label>Place description</label>
+                                                <label>Project Name</label>
                                                 <textarea class="form-control" name="description" form="property_form" required placeholder="4 bedroom 3 bathroom apartment by beach" rows="2" maxlength="50" ></textarea>
                                             </div>
                                         </div>

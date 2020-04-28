@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: jedidiahbowo
   Date: 4/19/20
@@ -15,7 +15,7 @@
 <section class="page-top-section set-bg" data-setbg="${pageContext.request.contextPath}/resource/img/hero-bg.jpg">
     <div class="container">
         <div class="page-top-warp">
-            <form action="${pageContext.request.contextPath}/search/location.do" class="main-search-form" id="propertee_search_form">
+            <form action="${pageContext.request.contextPath}/search/filter" class="main-search-form" id="propertee_search_form">
                 <div class="search-type">
                     <div class="st-item">
                         <input type="radio" name="list_for" id="buy" value="Sell" checked>
@@ -27,13 +27,49 @@
                     </div>
                 </div>
                 <div class="search-input si-v-2">
-                    <input type="text" name="keyword" placeholder="Search by state, zipcode or city"/>
-<%--                    <input type="submit" class="site-btn" value="Search"/>--%>
+                    <input type="text" name="keyword" placeholder="Search by state, zipcode or city" required/>
+                    <input type="hidden" name="page" value="0">
                     <button type="submit" class="site-btn" form="propertee_search_form">Search</button>
                     <button class="site-btn sb-light">Show Filters</button>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. </p>
             </form>
+        </div>
+        <div class="row" id="filters" style="background-color: white">
+            <div class="col-lg-12 filter-form">
+                    <div class="first-row">
+                        <label>Construction Type</label>
+                        <select name="property_type" form="propertee_search_form">
+                            <option selected>Any</option>
+                            <option value="house">House</option>
+                            <option value="house">Apartment</option>
+                        </select>
+                        <label>Posted since
+                            <select name="postedBy" form="propertee_search_form">
+                                <option selected>Anytime</option>
+                                <option value="<%=LocalDate.now().minusWeeks(1l)%>">past week</option>
+                                <option value="<%=LocalDate.now().minusMonths(1l)%>">past month</option>
+                                <option value="<%=LocalDate.now().minusYears(1l)%>">past Year</option>
+                            </select>
+                        </label>
+                        <label>
+                            Price $<input type="number" name="minBudget" form="propertee_search_form" placeholder="0">
+                        </label>-
+                        <label>
+                            $<input type="number" name="maxBudget" form="propertee_search_form" placeholder="0">
+                        </label>
+                        <label for="bedroom_num">Bedroom</label>
+                        <select id="bedroom_num" name="bedroom_num" form="propertee_search_form">
+                            <option selected>Any</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6+</option>
+                        </select>
+                    </div>
+            </div>
         </div>
     </div>
 </section>

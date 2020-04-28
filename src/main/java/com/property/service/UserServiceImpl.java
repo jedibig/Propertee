@@ -1,6 +1,6 @@
 package com.property.service;
 
-import com.property.dao.UserRepository;
+import com.property.dao.CustomUserRepository;
 import com.property.dto.User;
 import com.property.exception.DaoException;
 import com.property.exception.DuplicateEmailException;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService{
 
-    final UserRepository userRepository;
+    final CustomUserRepository userRepository;
 
     @Override
     public void insertNewUser(User user) throws DuplicateEmailException, DaoException {

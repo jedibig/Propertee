@@ -6,6 +6,7 @@ import com.property.dto.*;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 import com.property.service.ListingService;
+import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,6 @@ import java.time.LocalDate;
 public class PostListingController {
     static Logger logger = Logger.getLogger(PostListingController.class);
 
-    @Autowired
     final ListingFieldsMapper listingConverter;
     final PropertyDetailsConverter detailsConverter;
     final ListingService listingService;
@@ -37,7 +37,7 @@ public class PostListingController {
     public String postNewListing(Model m, @ModelAttribute Listing listing, BindingResult listingResult,
                                  @ModelAttribute Address address, BindingResult addressResult,
                                  @ModelAttribute User user, BindingResult userResult,
-                                 @ModelAttribute Property_Details property_details, BindingResult detailsResult,
+                                 @ModelAttribute PropertyDetails property_details, BindingResult detailsResult,
                                  @ModelAttribute Pricing pricing, BindingResult pricingResult) throws DaoException {
 
 //        if (result.hasErrors()){
@@ -66,7 +66,7 @@ public class PostListingController {
         dataBinder.registerCustomEditor(Listing.List_For.class, listingConverter.listForConverter);
         dataBinder.registerCustomEditor(Listing.House_Subtype.class, listingConverter.houseSubtypeConverter);
         dataBinder.registerCustomEditor(Listing.Apartment_Subtype.class, listingConverter.apartmentSubtypeConverter);
-        dataBinder.registerCustomEditor(Property_Details.Furnishing.class, detailsConverter.furnishingConverter);
+        dataBinder.registerCustomEditor(PropertyDetails.Furnishing.class, detailsConverter.furnishingConverter);
         dataBinder.registerCustomEditor(LocalDate.class, detailsConverter.dateConverter);
     }
 

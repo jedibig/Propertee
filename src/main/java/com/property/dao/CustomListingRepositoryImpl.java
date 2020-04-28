@@ -11,15 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class ListingRepoImpl implements ListingRepository{
-    Logger logger = Logger.getLogger(ListingRepoImpl.class);
+
+public class CustomListingRepositoryImpl implements CustomListingRepository {
+    Logger logger = Logger.getLogger(CustomListingRepositoryImpl.class);
 
     @Autowired SessionFactory sf;
 

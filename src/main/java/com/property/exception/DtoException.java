@@ -1,6 +1,6 @@
 package com.property.exception;
 
-public class DtoException extends Exception {
+public class DtoException extends RuntimeException {
     public DtoException() {
     }
 

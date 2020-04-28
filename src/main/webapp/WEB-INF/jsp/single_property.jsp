@@ -74,7 +74,7 @@
                         <div class="col-lg-4 text-left text-lg-right">
                             <div class="property-header">
                                 <h3>$${listing.price}</h3>
-                                <p>${listing.description}</p>
+                                <p>${listing.project_name}</p>
                             </div>
                         </div>
                     </div>
@@ -95,23 +95,23 @@
                     </div>
                     <div class="property-text">
                         <h4>Description</h4>
-                        <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. </p>
-                        <h4>Details</h4>
-                        <p>Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. </p>
+                        <p>${listing.details.description}</p>
                     </div>
                     <div class="property-feature">
                         <div class="row">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                                 <div class="pf-box">
                                     <h6>Property Type</h6>
-                                    <p>${listing.property_type}
-                                        <c:if test="${listing.apartment_subtype != null}">
-                                            ${listing.apartment_substype}
-                                        </c:if>
-                                        <c:if test="${listing.house_subtype != null}">
+                                    <p>
+                                    <c:choose>
+                                        <c:when test="${listing.property_type.toString().equals('HOME')}">
                                             ${listing.house_subtype}
-                                        </c:if>
-                                    </p>
+                                        </c:when>
+                                        <c:when test="${listing.property_type.toString().equals('APARTMENT')}">
+                                            ${listing.apartment_subtype}
+                                        </c:when>
+                                    </c:choose>
+                                        ${listing.property_type}</p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -223,9 +223,9 @@
                 <div class="agent-widget">
                     <img src="../../resource/img/agents/1.jpg" alt="">
                     <div class="aw-text">
-                        <h4>${listing.user.email}</h4>
+                        <h4>${listing.user.name}</h4>
+                        <h6>${listing.user.email}</h6>
                         <h6>${listing.user_type}</h6>
-                        <p>Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora. Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. </p>
                         <a href="#" class="readmore-btn">Contact the agent</a>
                     </div>
                 </div>

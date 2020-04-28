@@ -3,6 +3,7 @@ package com.property.service;
 import com.property.dto.*;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
+import com.property.exception.ListingNotFoundException;
 import com.property.exception.UserNotFoundException;
 
 import java.util.List;
@@ -14,11 +15,17 @@ public interface ListingService {
      * @param location can be a zipcode or city
      * @return
      */
-    Optional<List<Listing>> searchByLocation(String location) throws DaoException, DtoException;
+    Optional<List<Listing>> searchByLocation(String location);
 
-    Optional<Listing> getListingById(long id) throws DaoException, DtoException;
+    Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria);
 
-    Optional<List<Listing>> getListingFromUserId(long id) throws DaoException, UserNotFoundException;
+    Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria, int pageNum, int pageLimit, String sortBy, boolean descending);
+
+    Optional<Listing> getListingById(long id);
+
+    Optional<List<Listing>> getListingFromUserId(long id);
+
+    Optional<List<Listing>> getListingFromUserId(long id, int pageNum, int pageLimit, String sortBy, boolean descending);
 
     /**
      * Insert new listing into the database
@@ -31,7 +38,6 @@ public interface ListingService {
      * @throws DaoException
      * @throws DtoException
      */
-    long insertNewListing(Listing listing, Address address, Pricing pricing, Property_Details property_details, User user) throws DaoException, DtoException;
-
+    long insertNewListing(Listing listing, Address address, Pricing pricing, PropertyDetails property_details, User user);
 
 }

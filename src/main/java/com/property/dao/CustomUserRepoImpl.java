@@ -16,9 +16,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @AllArgsConstructor
-@Repository
-public class UserRepoImpl implements UserRepository {
-    static Logger logger = Logger.getLogger(UserRepoImpl.class);
+public class CustomUserRepoImpl implements CustomUserRepository {
+    static Logger logger = Logger.getLogger(CustomUserRepoImpl.class);
 
     final SessionFactory sf;
 

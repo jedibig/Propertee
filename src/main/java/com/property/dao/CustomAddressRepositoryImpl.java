@@ -1,7 +1,6 @@
 package com.property.dao;
 
 import com.property.dto.Address;
-import com.property.dto.Listing;
 import com.property.exception.DaoException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class AddressRepoImpl2 implements AddressRepository {
+public class CustomAddressRepositoryImpl implements CustomAddressRepository {
     @Autowired
     SessionFactory sf;
 

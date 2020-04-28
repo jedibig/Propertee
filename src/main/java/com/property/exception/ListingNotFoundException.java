@@ -1,4 +1,4 @@
 package com.property.exception;
 
-public class ListingNotFoundException extends DaoException {
+public class ListingNotFoundException extends DtoException {
 }

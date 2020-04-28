@@ -1,13 +1,10 @@
 package com.property.controller.util;
 
 
-import com.property.dto.Property_Details;
+import com.property.dto.PropertyDetails;
 import org.springframework.stereotype.Component;
 
 import java.beans.PropertyEditorSupport;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Component
@@ -20,7 +17,7 @@ public class PropertyDetailsConverter {
     public class FurnishingConverter extends PropertyEditorSupport {
         @Override
         public void setAsText(String text) throws IllegalArgumentException {
-            setValue(Enum.valueOf(Property_Details.Furnishing.class, text.toUpperCase()));
+            setValue(Enum.valueOf(PropertyDetails.Furnishing.class, text.toUpperCase()));
         }
     }
 
