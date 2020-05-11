@@ -87,13 +87,15 @@
                                             <h5><fmt:formatNumber type="currency" currencyCode="USD" value="${l.price}"/></h5>
                                             <div class="pi-metas">
                                                 <div class="pi-meta">${l.area} sq ft</div>
-                                                <div class="pi-meta">${l.city}</div>
+                                                <div class="pi-meta">${l.address}</div>
                                             </div>
                                             <a href="${pageContext.request.contextPath}/get/listing.do?listing_id=${l.listing_id}" class="readmore-btn">Find out more</a>
                                         </div>
                                     </div>
                                 </c:forEach>
-                                <button class="site-btn sb-big load-more">load More</button>
+                                <form action="${pageContext.request.contextPath}${next_page_uri}" id="next_form">
+                                    <button class="site-btn sb-big load-more" type="submit" form="next_form">Next Page</button>
+                                </form>
                             </c:otherwise>
                         </c:choose>
                     </div>

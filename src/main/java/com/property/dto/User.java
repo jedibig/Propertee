@@ -21,30 +21,27 @@ public class User {
     final static String PASSWORD_PATTERN = "";
     final static String PHONENUMBER_PATTERN = "";
 
-
-    @Id @GeneratedValue @ToString.Exclude
+    @Id @ToString.Exclude @Column(name = "listing_id")
     private long id;
+    @OneToOne
+    @JoinColumn(name = "listing_id")
+    @MapsId
+    @ToString.Exclude
+    private Listing listing;
     @Column(name = "name")
     private String name;
-    @Column(unique = true, name="email") @Email
+    @Column(unique = true, name="email")
     private String email;
-    @Column(name = "password") @Pattern(regexp = PASSWORD_PATTERN)
-    private String password;
-    @Column(name = "phoneNumber") @Pattern(regexp = PASSWORD_PATTERN)
+    @Column(name = "password")
+    private String about;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
-    private List<Listing> listings;
+//    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
+//    private List<Listing> listings;
 
-    @Version
+
+    @Version @ToString.Exclude
     private int version;
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
-    }
+
 }

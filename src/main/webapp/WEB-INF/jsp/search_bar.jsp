@@ -15,20 +15,19 @@
 <section class="page-top-section set-bg" data-setbg="${pageContext.request.contextPath}/resource/img/hero-bg.jpg">
     <div class="container">
         <div class="page-top-warp">
-            <form action="${pageContext.request.contextPath}/search/filter" class="main-search-form" id="propertee_search_form">
+            <form action="${pageContext.request.contextPath}/listings" class="main-search-form" id="propertee_search_form">
                 <div class="search-type">
                     <div class="st-item">
-                        <input type="radio" name="list_for" id="buy" value="Sell" checked>
+                        <input type="radio" name="list_for" id="buy" value="SELL" checked>
                         <label for="buy">Buy</label>
                     </div>
                     <div class="st-item">
-                        <input type="radio" name="list_for" value="Rent" id="rent">
+                        <input type="radio" name="list_for" value="Rent" id="RENT">
                         <label for="rent">Rent</label>
                     </div>
                 </div>
                 <div class="search-input si-v-2">
                     <input type="text" name="keyword" placeholder="Search by state, zipcode or city" required/>
-                    <input type="hidden" name="page" value="0">
                     <button type="submit" class="site-btn" form="propertee_search_form">Search</button>
                     <button class="site-btn sb-light">Show Filters</button>
                 </div>
@@ -40,13 +39,13 @@
                     <div class="first-row">
                         <label>Construction Type</label>
                         <select name="property_type" form="propertee_search_form">
-                            <option selected>Any</option>
-                            <option value="house">House</option>
-                            <option value="house">Apartment</option>
+                            <option selected value="">Any</option>
+                            <option value="HOUSE">House</option>
+                            <option value="APARTMENT">Apartment</option>
                         </select>
                         <label>Posted since
                             <select name="postedBy" form="propertee_search_form">
-                                <option selected>Anytime</option>
+                                <option selected value="">Anytime</option>
                                 <option value="<%=LocalDate.now().minusWeeks(1l)%>">past week</option>
                                 <option value="<%=LocalDate.now().minusMonths(1l)%>">past month</option>
                                 <option value="<%=LocalDate.now().minusYears(1l)%>">past Year</option>
@@ -56,11 +55,11 @@
                             Price $<input type="number" name="minBudget" form="propertee_search_form" placeholder="0">
                         </label>-
                         <label>
-                            $<input type="number" name="maxBudget" form="propertee_search_form" placeholder="0">
+                            $<input type="number" name="maxBudget" form="propertee_search_form" placeholder="10000">
                         </label>
                         <label for="bedroom_num">Bedroom</label>
-                        <select id="bedroom_num" name="bedroom_num" form="propertee_search_form">
-                            <option selected>Any</option>
+                        <select id="bedroom_num" name="num_bedroom" form="propertee_search_form">
+                            <option selected value="">Any</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

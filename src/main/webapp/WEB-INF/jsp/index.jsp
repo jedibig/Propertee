@@ -46,6 +46,9 @@
 <%@include file="header.jsp"%>
 <!-- Header Section end -->
 
+<h2 style="color: orangered">${error}</h2>
+<h2 style="color: greenyellow">${info}</h2>
+
 
 <!-- Hero Section -->
 <%@include file="search_bar.jsp"%>

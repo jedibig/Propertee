@@ -4,7 +4,7 @@ import com.property.dto.Listing;
 import com.property.dto.User;
 import com.property.exception.DaoException;
 import com.property.exception.ListingNotFoundException;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 
 public class CustomListingRepositoryImpl implements CustomListingRepository {
-    Logger logger = Logger.getLogger(CustomListingRepositoryImpl.class);
+    Logger logger = Logger.getLogger(CustomListingRepositoryImpl.class.getName());
 
     @Autowired SessionFactory sf;
 
@@ -44,7 +44,7 @@ public class CustomListingRepositoryImpl implements CustomListingRepository {
 
             return listing.getListing_id();
         } catch (HibernateException e){
-            logger.error("Got error " + e.getMessage());
+            logger.severe("Got error " + e.getMessage());
             throw new DaoException(e);
         }
     }

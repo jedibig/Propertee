@@ -7,53 +7,65 @@ import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 import com.property.service.ListingService;
 import lombok.AllArgsConstructor;
-import org.apache.log4j.Logger;
+
+import java.security.Principal;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 
 @Controller
+@AllArgsConstructor
 public class PostListingController {
-    static Logger logger = Logger.getLogger(PostListingController.class);
+    static Logger logger = Logger.getLogger(PostListingController.class.getName());
 
     final ListingFieldsMapper listingConverter;
     final PropertyDetailsConverter detailsConverter;
     final ListingService listingService;
 
-    public PostListingController(ListingFieldsMapper listingConverter, PropertyDetailsConverter detailsConverter, ListingService listingService) {
-        this.listingConverter = listingConverter;
-        this.detailsConverter = detailsConverter;
-        this.listingService = listingService;
+
+    @GetMapping("/listings/new/form")
+    public String checkUserCredentials(Model m, HttpSession session){
+//        if (session.getAttribute("user") == null){
+//            m.addAttribute("error", "Must login to post a listing.");
+//            return "login";
+//        }
+
+        return "post_property";
     }
 
     @PostMapping("/post/listing.do")
-    public String postNewListing(Model m, @ModelAttribute Listing listing, BindingResult listingResult,
+    @PutMapping("/listings/new")
+    public String postNewListing(Model m, HttpSession session, Principal principal,
+                                 @ModelAttribute Listing listing, BindingResult listingResult,
                                  @ModelAttribute Address address, BindingResult addressResult,
-                                 @ModelAttribute User user, BindingResult userResult,
                                  @ModelAttribute PropertyDetails property_details, BindingResult detailsResult,
-                                 @ModelAttribute Pricing pricing, BindingResult pricingResult) throws DaoException {
+                                 @ModelAttribute Pricing pricing, BindingResult pricingResult,
+                                 @ModelAttribute User user, BindingResult userResult) throws DaoException {
 
 //        if (result.hasErrors()){
 //            logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
 //        }
 
         try {
+            String admin = principal.getName();
+            listing.setPostedBy(admin);
             long listing_id = listingService.insertNewListing(listing, address, pricing, property_details, user);
             m.addAttribute("listing_id", listing_id);
-            m.addAttribute("email", user.getEmail());
+            m.addAttribute("email", admin);
 
         } catch (DtoException e) {
             e.printStackTrace();
         }
 
-        logger.info(listing);
+        logger.info(listing.toString());
         //TODO create success page
         return "add_listing_success";
     }

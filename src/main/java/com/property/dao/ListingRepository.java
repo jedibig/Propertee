@@ -16,7 +16,6 @@ import java.util.Optional;
 public interface ListingRepository extends JpaRepository<Listing, Long>, JpaSpecificationExecutor {
     Optional<List<Listing>> findAllByUser_Id(long userId, Pageable paging);
     Optional<List<Listing>> findAllByAddress_CityIgnoreCaseContains(String keyword);
-//    Optional<List<Listing>> findAll(Specification<Listing> specification, Pageable paging);
 
 
     static Pageable getPaging(int pageNum, int pageLimit, String sortBy, boolean descending){

@@ -36,12 +36,12 @@
 
             <li><a href="${pageContext.request.contextPath}/home" class="${home_class}">Home</a></li>
             <li><a href="${pageContext.request.contextPath}/about" class="${about_class}">About</a></li>
-            <li><a href="${pageContext.request.contextPath}/property-form" class="${form_class}">Post Listing</a></li>
+            <li><a href="${pageContext.request.contextPath}/listings/new/form" class="${form_class}">Post Listing</a></li>
             <c:choose>
-                <c:when test="${sessionScope.user != null}">
+                <c:when test="${sessionScope.user == null}">
                     <div class="header-right">
                         <div class="user-panel">
-                            <a href="#" class="register" role="button" data-toggle="modal" data-target="#login-modal">Log in</a>
+                            <a href="/login" class="register" role="button" data-toggle="modal" data-target="#login-modal">Log in</a>
 <%--                            <a href="${pageContext.request.contextPath}/login" class="btn btn-primary btn-lg ">Sign in</a>--%>
 <%--                            <a href="${pageContext.request.contextPath}/register" class="register">Join us</a>--%>
                         </div>
@@ -52,7 +52,7 @@
                         <ul class="sub-menu">
                             <li><a href="#">View Profile</a></li>
                             <li><a href="#">View User Listings</a></li>
-                            <li><a href="login">Logout</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                     </li>
                     </ul>

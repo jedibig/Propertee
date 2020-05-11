@@ -4,18 +4,20 @@ import com.property.dao.ListingRepository;
 import com.property.dao.ListingSpecification;
 import com.property.dto.*;
 import com.property.exception.*;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ListingServiceImpl implements ListingService{
-    static Logger logger = Logger.getLogger(ListingServiceImpl.class);
+    static Logger logger = Logger.getLogger(ListingSearchServiceImpl.class.getName());
 
     @Autowired
     ListingRepository listingRepository;
@@ -36,18 +38,18 @@ public class ListingServiceImpl implements ListingService{
                 logger.info("keyword is invalid");
                 throw new UserInputException("Input does not match for city, state, or zipcode");
         }
-        SearchCriteria criteria = new SearchCriteria();
+        SearchCriteriaJPA criteria = new SearchCriteriaJPA();
         criteria.setKeyword(location);
         return searchWithCriteria(criteria);
     }
 
     @Override
-    public Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria) {
+    public Optional<List<Listing>> searchWithCriteria(SearchCriteriaJPA criteria) {
         return searchWithCriteria(criteria, 0, 10, "listing_id", false);
     }
 
     @Override
-    public Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria, int pageNum, int pageLimit, String sortBy, boolean descending) {
+    public Optional<List<Listing>> searchWithCriteria(SearchCriteriaJPA criteria, int pageNum, int pageLimit, String sortBy, boolean descending) {
         if (criteria.getKeyword() == null)
             throw new InvalidInputException();
         List<Listing> listings = listingRepository.findAll( ListingSpecification.createSpecification(criteria));
@@ -71,12 +73,22 @@ public class ListingServiceImpl implements ListingService{
     }
 
     @Override
+    @Modifying
     public long insertNewListing(Listing listing, Address address, Pricing pricing, PropertyDetails property_details, User user){
         listing.setAddress(address);
         listing.setPricing(pricing);
         listing.setDetails(property_details);
         listing.setUser(user);
         listing.setDate_listed(new Date());
+
+        ListingElastic elastic = new ListingElastic();
+        elastic.setAddress(address.getStreet() +" "+ address.getCity() +" "+ address.getState() +" "+ address.getZipcode());
+        elastic.setArea(listing.getArea());
+        elastic.setDate_listed(listing.getDate_listed());
+        elastic.setDescription(property_details.getDescription());
+        elastic.setTags(new String[]{address.getStreet(), address.getCity(), address.getState(), address.getZipcode()});
+
+
         return listingRepository.save(listing).getListing_id();
     }
 }

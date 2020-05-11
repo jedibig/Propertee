@@ -1,12 +1,11 @@
 package com.property.dao;
 
 import com.property.dto.Listing;
-import com.property.dto.SearchCriteria;
+import com.property.dto.SearchCriteriaJPA;
 import com.property.exception.InvalidInputException;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 
 public class ListingSpecification {
@@ -56,7 +55,7 @@ public class ListingSpecification {
     }
 
 
-    public static Specification<Listing> createSpecification(SearchCriteria criteria){
+    public static Specification<Listing> createSpecification(SearchCriteriaJPA criteria){
         if (criteria.getKeyword() == null || criteria.getList_for() == null)
             throw new InvalidInputException();
         Specification<Listing> specification = byKeyword(criteria.getKeyword()).and(byListFor(criteria.getList_for()));

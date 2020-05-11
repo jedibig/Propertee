@@ -9,7 +9,7 @@ import java.util.Date;
 
 @NoArgsConstructor
 @Data
-public class SearchCriteria {
+public class SearchCriteriaJPA {
     private Listing.List_For list_for;
     private Listing.Property_Type property_type;
     private String keyword;

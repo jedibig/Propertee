@@ -76,6 +76,10 @@ a:focus {
 	outline: none;
 }
 
+highlight{
+	font-weight: bold;
+}
+
 ul,
 ol {
 	padding: 0;

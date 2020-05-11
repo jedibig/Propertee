@@ -17,11 +17,12 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "PROPERTY_LISTING")
+@SequenceGenerator(name = "listing_id_seq", sequenceName = "listing_id_seq", initialValue = 200)
 public class Listing {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "listing_id_seq")
     @Column(name = "LISTING_ID")
     private long listing_id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
 
@@ -71,6 +72,8 @@ public class Listing {
     @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PropertyDetails details;
 
+    @Column(name = "postedBy")
+    private String postedBy;
 
 
     public enum User_Type{
@@ -95,6 +98,7 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
+        user.setListing(this);
 //        List<Listing> list = user.getListing();
 //        if (list == null){
 //            list = new LinkedList<>();

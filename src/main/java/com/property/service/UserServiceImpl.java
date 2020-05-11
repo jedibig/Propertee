@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class UserServiceImpl implements UserService{
 
-    final CustomUserRepository userRepository;
+    CustomUserRepository userRepository;
 
     @Override
     public void insertNewUser(User user) throws DuplicateEmailException, DaoException {

@@ -2,13 +2,13 @@ package com.property.controller;
 
 import com.property.controller.util.ListingFieldsMapper;
 import com.property.dto.Listing;
-import com.property.dto.SearchCriteria;
+import com.property.dto.SearchCriteriaJPA;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
 import com.property.service.ListingService;
 import lombok.AllArgsConstructor;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.logging.Logger;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +20,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/search")
 @AllArgsConstructor
 public class SearchController {
-    static Logger logger = Logger.getLogger(SearchController.class);
+    static Logger logger = Logger.getLogger(SearchController.class.getName());
 
     final ListingService listingService;
     final ListingFieldsMapper listingConverter;
@@ -50,7 +49,7 @@ public class SearchController {
             return "search_result";
 
         } catch (DtoException e) {
-            logger.error("got error message" + e.getMessage());
+            logger.severe("got error message" + e.getMessage());
             m.addAttribute("error", e.getMessage());
             return "index";
         }
@@ -58,10 +57,10 @@ public class SearchController {
     }
 
     @GetMapping("/filter")
-    public String searchOnCrieria(Model m, @ModelAttribute SearchCriteria criteria, BindingResult result, @RequestParam("page") String page){
+    public String searchOnCrieria(Model m, @ModelAttribute SearchCriteriaJPA criteria, BindingResult result, @RequestParam("page") String page){
         logger.info("Receive request to search with criteria.");
 
-        logger.info(criteria);
+        logger.info(criteria.toString());
         List<Listing> listings = listingService.searchWithCriteria(criteria).orElse(Collections.emptyList());
         if (listings.isEmpty()){
             logger.info("No listing found;");
@@ -78,7 +77,7 @@ public class SearchController {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String handleMissingParams(MissingServletRequestParameterException ex) {
         String name = ex.getParameterName();
-        logger.error(name + " parameter is missing");
+        logger.severe(name + " parameter is missing");
         return "defaulterror";
     }
 

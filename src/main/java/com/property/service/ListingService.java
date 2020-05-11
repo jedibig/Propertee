@@ -3,8 +3,6 @@ package com.property.service;
 import com.property.dto.*;
 import com.property.exception.DaoException;
 import com.property.exception.DtoException;
-import com.property.exception.ListingNotFoundException;
-import com.property.exception.UserNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +15,9 @@ public interface ListingService {
      */
     Optional<List<Listing>> searchByLocation(String location);
 
-    Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria);
+    Optional<List<Listing>> searchWithCriteria(SearchCriteriaJPA criteria);
 
-    Optional<List<Listing>> searchWithCriteria(SearchCriteria criteria, int pageNum, int pageLimit, String sortBy, boolean descending);
+    Optional<List<Listing>> searchWithCriteria(SearchCriteriaJPA criteria, int pageNum, int pageLimit, String sortBy, boolean descending);
 
     Optional<Listing> getListingById(long id);
 

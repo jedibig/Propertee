@@ -17,64 +17,30 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-    <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/paper-bootstrap-wizard"/>
-
-    <meta name="keywords" content="wizard, bootstrap wizard, creative tim, long forms, 3 step wizard, sign up wizard, beautiful wizard, long forms wizard, wizard with validation, paper design, paper wizard bootstrap, bootstrap paper wizard">
-    <meta name="description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors.">
-
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Paper Bootstrap Wizard by Creative Tim">
-    <meta itemprop="description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors.">
-    <meta itemprop="imaƒge" content="https://s3.amazonaws.com/creativetim_bucket/products/49/opt_pbw_thumbnail.jpg">
-
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@creativetim">
-    <meta name="twitter:title" content="Paper Bootstrap Wizard by Creative Tim">
-    <meta name="twitter:description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors.">
-    <meta name="twitter:creator" content="@creativetim">
-    <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/49/opt_pbw_thumbnail.jpg">
-
-    <!-- Open Graph data -->
-    <meta property="og:title" content="Paper Bootstrap Wizard by Creative Tim | Free Boostrap Wizard" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://demos.creative-tim.com/paper-bootstrap-wizard/wizard-list-place.html" />
-    <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/49/opt_pbw_thumbnail.jpg" />
-    <meta property="og:description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors." />
-    <meta property="og:site_name" content="Creative Tim" />
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css">
     <link href="${pageContext.request.contextPath}/resource/css/paper-bootstrap-wizard.css" rel="stylesheet" />
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="${pageContext.request.contextPath}/resource/css/demo.css" rel="stylesheet" />
 
     <!-- Fonts and Icons -->
     <link href="${pageContext.request.contextPath}/resource/css/font-awesome.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resource/css/themify-icons.css" rel="stylesheet">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
-    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/style.css"/>
+
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 <div class="image-container set-full-height" style="background-image: url('${pageContext.request.contextPath}/resource/img/paper-2.jpeg')">
 
 
     <!-- Header Section -->
     <%@include file="header.jsp"%>
     <!-- Header Section end -->
+
 
     <!--   Big container   -->
     <div class="container">
@@ -125,7 +91,7 @@
                                             <div class="icon-circle">
                                                 <i class="ti-comments"></i>
                                             </div>
-                                            User Information
+                                            Contact Info
                                         </a>
                                     </li>
                                 </ul>
@@ -305,7 +271,7 @@
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <div class="form-group">
                                                 <label>Project Name</label>
-                                                <textarea class="form-control" name="description" form="property_form" required placeholder="4 bedroom 3 bathroom apartment by beach" rows="2" maxlength="50" ></textarea>
+                                                <textarea class="form-control" name="project_name" form="property_form" required placeholder="4 bedroom 3 bathroom apartment by beach" rows="2" maxlength="50" ></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -391,6 +357,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-10 col-sm-offset-1">
+                                            <div class="form-group">
+                                                <label>Property Description</label>
+                                                <textarea class="form-control" name="description" form="property_form" required placeholder="" rows="2" maxlength="50" ></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>Upload the property image</label>
+                                                <div class="input-group">
+                                                    <input type="file" name="file" accept="image/jpeg"/>
+                                                    <input type="number" min="0" step="1" name="age" class="form-control" required>
+                                                    <span class="input-group-addon">years</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="description">
@@ -406,6 +388,18 @@
                                             <div class="form-group">
                                                 <label>Phone number</label>
                                                 <input type="text" pattern="\d{10}" class="form-control" name="phonenumber" placeholder="995-123-4434" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 col-sm-offset-1">
+                                            <div class="form-group">
+                                                <label>Name</label><br>
+                                                <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 ">
+                                            <div class="form-group">
+                                                <label>About the lister</label>
+                                                <textarea class="form-control" name="about" form="property_form" placeholder="" rows="2" maxlength="50" ></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -436,12 +430,18 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
 
 <!--  Plugin for the Wizard -->
 <script src="${pageContext.request.contextPath}/resource/js/demo.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resource/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/js/main.js"></script>
+
 
 <!--  More information about jquery.validate here: https://jqueryvalidation.org/	 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript"></script>
+
 
 </html>
