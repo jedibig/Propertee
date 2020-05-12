@@ -5,6 +5,46 @@
     <title>Title</title>
 </head>
 <body>
-Hello from PP
+<div id="bloodhound">
+    <input class="typeahead" type="text" placeholder="States of USA">
+</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+
+<script>
+    var states = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        // `states` is an array of state names defined in "The Basics"
+        remote: {
+            url: 'http://localhost:9200/autocomplete/_search?q=key:%QUERY',
+            wildcard: '%QUERY',
+            filter: function (data) {
+                // Map the remote source JSON array to a JavaScript object array
+                return data.hits.hits.map(i => i._source.<field-name>)
+            }
+        }
+    });
+
+    $('#bloodhound .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'states',
+            source: states
+        });
+
+
+    function a() {
+        var list;
+        $.getJSON("http://localhost:9200/autocomplete/_search?q=key:"+$('#search').val(), function(data) {
+            list=data.hits.hits.map(i => i._source.key);
+            console.log(list);
+        });
+        return list;
+    }
+</script>
 </html>

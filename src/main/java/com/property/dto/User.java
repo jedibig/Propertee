@@ -21,13 +21,9 @@ public class User {
     final static String PASSWORD_PATTERN = "";
     final static String PHONENUMBER_PATTERN = "";
 
-    @Id @ToString.Exclude @Column(name = "listing_id")
+    @Id @GeneratedValue
     private long id;
-    @OneToOne
-    @JoinColumn(name = "listing_id")
-    @MapsId
-    @ToString.Exclude
-    private Listing listing;
+
     @Column(name = "name")
     private String name;
     @Column(unique = true, name="email")
@@ -37,8 +33,9 @@ public class User {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-//    @OneToMany(fetch = FetchType.LAZY ) @Column(name = "listing_id") @ToString.Exclude
-//    private List<Listing> listings;
+    @OneToMany(fetch = FetchType.LAZY )
+    @Column(name = "listing_id") @ToString.Exclude
+    private List<Listing> listings;
 
 
     @Version @ToString.Exclude

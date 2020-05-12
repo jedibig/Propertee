@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="search-input si-v-2">
-                    <input type="text" name="keyword" placeholder="Search by state, zipcode or city" required/>
+                    <input type="text" name="keyword" id="keyword" placeholder="Search by state, zipcode or city" required/>
                     <button type="submit" class="site-btn" form="propertee_search_form">Search</button>
                     <button class="site-btn sb-light">Show Filters</button>
                 </div>

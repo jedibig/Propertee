@@ -11,15 +11,19 @@ import lombok.AllArgsConstructor;
 import java.security.Principal;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @AllArgsConstructor
@@ -41,8 +45,7 @@ public class PostListingController {
         return "post_property";
     }
 
-    @PostMapping("/post/listing.do")
-    @PutMapping("/listings/new")
+    @PostMapping("/listings/new")
     public String postNewListing(Model m, HttpSession session, Principal principal,
                                  @ModelAttribute Listing listing, BindingResult listingResult,
                                  @ModelAttribute Address address, BindingResult addressResult,
@@ -50,9 +53,12 @@ public class PostListingController {
                                  @ModelAttribute Pricing pricing, BindingResult pricingResult,
                                  @ModelAttribute User user, BindingResult userResult) throws DaoException {
 
-//        if (result.hasErrors()){
-//            logger.info("Got error from binding" + result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
-//        }
+        Stream.of(listingResult, addressResult, detailsResult, pricingResult, userResult)
+                .filter(Errors::hasErrors)
+                .forEach(e -> {
+                    logger.info("Got error from binding" + e.getAllErrors().stream()
+                            .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
+                });
 
         try {
             String admin = principal.getName();

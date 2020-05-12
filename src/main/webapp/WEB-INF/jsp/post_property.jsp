@@ -19,7 +19,7 @@
 
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resource/css/paper-bootstrap-wizard.css" rel="stylesheet" />
 
 
@@ -50,7 +50,7 @@
                 <!--      Wizard container        -->
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="red" id="wizard">
-                        <form action="${pageContext.request.contextPath}/post/listing.do" method="post" id="property_form">
+                        <form action="${pageContext.request.contextPath}/listings/new" method="POST" id="property_form">
                             <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
 
                             <div class="wizard-header">
@@ -368,8 +368,6 @@
                                                 <label>Upload the property image</label>
                                                 <div class="input-group">
                                                     <input type="file" name="file" accept="image/jpeg"/>
-                                                    <input type="number" min="0" step="1" name="age" class="form-control" required>
-                                                    <span class="input-group-addon">years</span>
                                                 </div>
                                             </div>
                                         </div>

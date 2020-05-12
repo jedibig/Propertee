@@ -248,8 +248,35 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js">
+<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/main.js"></script>
+<script>
+    var states = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        // `states` is an array of state names defined in "The Basics"
+        remote: {
+            url: 'http://localhost:9200/autocomplete/_search?q=key:%QUERY',
+            wildcard: '%QUERY',
+            filter: function (data) {
+                // Map the remote source JSON array to a JavaScript object array
+                return data.hits.hits.map(i => i._source.key)
+            }
+        }
+    });
+
+    $('#keyword').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'states',
+            source: states
+        });
+</script>
+
 
 </body>
 </html>

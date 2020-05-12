@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 
 @Entity
@@ -98,12 +99,9 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
-        user.setListing(this);
-//        List<Listing> list = user.getListing();
-//        if (list == null){
-//            list = new LinkedList<>();
-//        }
-//        list.add(this);
+        if (user.getListings() == null)
+            user.setListings(Collections.singletonList(this));
+        user.getListings().add(this);
     }
 
     public void setAddress(Address address) {
