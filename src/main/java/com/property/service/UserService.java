@@ -11,6 +11,6 @@ public interface UserService {
 
     void insertNewUser(User user) throws DuplicateEmailException, DaoException;
     Optional<User> validateUser(User user) throws UserNotFoundException, DaoException;
-    Optional<User> applyDifferences(User prevUserDetails, User newUserDetails);
     void updateUser(User user) throws DaoException;
+    long getUserIdFromEmail(String email);
 }

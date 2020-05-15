@@ -2,9 +2,7 @@ package com.property.dao;
 
 import com.property.dto.User;
 import com.property.exception.DaoException;
-import com.property.exception.DtoException;
 import com.property.exception.DuplicateEmailException;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
@@ -18,4 +16,6 @@ public interface CustomUserRepository {
     void removeUser(User user) throws DaoException;
     Optional<User> verifyUserLogin(User user) throws DaoException;
     User getUserById(long id) throws DaoException;
+    Optional<User> getUserByEmail(String email) throws DaoException;
+
 }

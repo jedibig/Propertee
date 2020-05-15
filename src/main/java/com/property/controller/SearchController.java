@@ -1,6 +1,6 @@
 package com.property.controller;
 
-import com.property.controller.util.ListingFieldsMapper;
+import com.property.controller.util.EnumTypeConverter;
 import com.property.dto.Listing;
 import com.property.dto.SearchCriteriaJPA;
 import com.property.exception.DaoException;
@@ -28,8 +28,6 @@ public class SearchController {
     static Logger logger = Logger.getLogger(SearchController.class.getName());
 
     final ListingService listingService;
-    final ListingFieldsMapper listingConverter;
-
 
 
     @GetMapping("/location.do")
@@ -83,6 +81,6 @@ public class SearchController {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-        dataBinder.registerCustomEditor(Listing.List_For.class, listingConverter.listForConverter);
+        dataBinder.registerCustomEditor(Listing.List_For.class, new EnumTypeConverter<>(Listing.List_For.class));
     }
 }

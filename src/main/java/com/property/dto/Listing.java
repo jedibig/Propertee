@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 
@@ -36,6 +36,7 @@ public class Listing {
     private Property_Type property_type;
 
     @Enumerated(EnumType.STRING)
+    @NotEmpty
     @Column(name = "user_type")
     private User_Type user_type;
 

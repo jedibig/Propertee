@@ -1,7 +1,7 @@
 package com.property.service;
 
 import com.property.dao.ListingRepository;
-import com.property.dao.ListingSpecification;
+import com.property.dao.util.ListingSpecification;
 import com.property.dto.*;
 import com.property.exception.*;
 import java.util.logging.Logger;

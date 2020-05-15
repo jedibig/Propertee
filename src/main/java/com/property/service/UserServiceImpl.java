@@ -25,15 +25,15 @@ public class UserServiceImpl implements UserService{
         return userRepository.verifyUserLogin(user);
     }
 
-    @Override
-    public Optional<User> applyDifferences(User prevUserDetails, User newUserDetails) {
-        //TODO
-        return Optional.empty();
-    }
 
     @Override
     public void updateUser(User user) throws DaoException {
         userRepository.updateUser(user);
+    }
+
+    @Override
+    public long getUserIdFromEmail(String email) {
+        return userRepository.getUserByEmail(email).orElseThrow(UserNotFoundException::new).getId();
     }
 
 }

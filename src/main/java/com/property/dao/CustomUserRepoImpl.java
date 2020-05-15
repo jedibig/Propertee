@@ -84,9 +84,15 @@
 //        } catch (HibernateException e){
 //            throw new DaoException(e);
 //        }
+//
 //    }
 //
 //    public User getUserById(long id) throws DaoException {
+//        return null;
+//    }
+//
+//    @Override
+//    public User getUserByEmail(String email) throws DaoException {
 //        return null;
 //    }
 //}

@@ -1,4 +1,4 @@
-package com.property.dao;
+package com.property.dao.util;
 
 import com.property.dto.Listing;
 import com.property.dto.SearchCriteriaJPA;
