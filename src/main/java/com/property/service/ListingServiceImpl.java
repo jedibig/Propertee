@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ListingServiceImpl implements ListingService{
-    static Logger logger = Logger.getLogger(ListingSearchServiceImpl.class.getName());
+    static Logger logger = Logger.getLogger(ListingServiceImpl.class.getName());
 
     @Autowired
     ListingRepository listingRepository;
